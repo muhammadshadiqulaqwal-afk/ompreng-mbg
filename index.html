@@ -1,0 +1,29 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Penghitung Ompreng MBG</title>
+<style>
+body{font-family:system-ui,Arial;padding:20px;background:#121212;color:#eee;max-width:720px;margin:0 auto;}
+.card{border-radius:12px;padding:16px;background:#1e1e1e;margin-bottom:12px}
+.big{font-size:2.4rem;font-weight:700;text-align:center;margin:12px 0}
+button,input{border-radius:8px;border:none;padding:10px;margin:4px;background:#333;color:#eee}
+button{cursor:pointer}
+.history{max-height:220px;overflow:auto;margin-top:10px;padding:8px;border-radius:8px;background:#222}
+</style>
+</head><body>
+<h1>Penghitung Ompreng MBG</h1>
+<div class="card">
+<div>Total</div><div id="total" class="big">0</div>
+<button onclick="inc()">+</button><button onclick="dec()">-</button>
+<input id="batch" type="number" placeholder="Jumlah batch" />
+<button onclick="addBatch()">Tambah Batch</button>
+<div id="history" class="history"></div>
+</div>
+<script>
+let total = 0; let hist=[];
+function update(){document.getElementById('total').textContent=total;
+document.getElementById('history').innerHTML=hist.map(h=>h).join('<br>');}
+function inc(){total++; hist.push('+1 → '+total); update();}
+function dec(){if(total>0){total--; hist.push('-1 → '+total); update();}}
+function addBatch(){let v=parseInt(document.getElementById('batch').value||0);
+if(v>0){total+=v; hist.push('+'+v+' → '+total); update();}}
+update();
+</script></body></html>
